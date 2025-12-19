@@ -99,7 +99,7 @@ const Tasks = () => {
 
     const handleMenuClose = () => {
         setAnchorEl(null);
-        setSelectedTask(null);
+        // setSelectedTask(null);
     };
 
     const handleEdit = () => {
@@ -114,18 +114,39 @@ const Tasks = () => {
         handleMenuClose();
     };
 
+    // const handleDeleteConfirm = async () => {
+    //     try {
+    //         await taskService.deleteTask(selectedTask._id);
+    //         toast.success('Task deleted successfully');
+    //         loadTasks();
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error('Failed to delete task');
+    //     } finally {
+    //         setDeleteDialog(false);
+    //         setSelectedTask(null);
+    //     }
+    // };
+
     const handleDeleteConfirm = async () => {
-        try {
-            await taskService.deleteTask(selectedTask._id);
-            toast.success('Task deleted successfully');
-            loadTasks();
-        } catch (error) {
-            toast.error('Failed to delete task');
-        } finally {
-            setDeleteDialog(false);
-            setSelectedTask(null);
-        }
-    };
+    if (!selectedTask?._id) {
+        toast.error('No task selected');
+        return;
+    }
+
+    try {
+        await taskService.deleteTask(selectedTask._id);
+        toast.success('Task deleted successfully');
+        loadTasks();
+    } catch (error) {
+        console.log(error);
+        toast.error('Failed to delete task');
+    } finally {
+        setDeleteDialog(false);
+        setSelectedTask(null);
+    }
+};
+
 
     const handleComplete = async (taskId) => {
         try {

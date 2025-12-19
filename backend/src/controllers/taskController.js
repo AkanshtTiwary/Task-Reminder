@@ -137,6 +137,7 @@ export const deleteTask = async (req, res) => {
         if (!task) return res.status(404).json({ success: false, message: 'Task not found' });
         res.json({ success: true, message: 'Task deleted' });
     } catch (error) {
+        console.log("hello erorr");
         res.status(500).json({ success: false, message: 'Error deleting task' });
     }
 };
