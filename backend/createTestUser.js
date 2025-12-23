@@ -1,23 +1,8 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import User from './src/models/User.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
-
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    phone: String,
-    notificationPreferences: {
-        email: { type: Boolean, default: true },
-        push: { type: Boolean, default: true },
-        sms: { type: Boolean, default: false }
-    },
-    createdAt: { type: Date, default: Date.now }
-});
-
-const User = mongoose.model('User', userSchema);
 
 async function createTestUser() {
     try {
