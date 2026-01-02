@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+     <div class="flex justify-evenly px-4 bg-blue-200 py-4">
+        <input type="text" placeholder="Enter your name: " class="border p-3 " id="name">
+        
+         <input type="email" placeholder="Enter your Email: " class="border p-3 " id="email">
+          <input type="number" placeholder="Enter your number: " class="border p-3 " id="num">
+        <!-- <button class="border px-4 py-2 rounded-2xl" id="btn">Click here to add data</button> -->
+         <button class="border px-4 py-2 rounded-2xl bg-blue-500 text-white" onclick="{handleClick()}">Click here to add data</button>
+        
+    </div>
+    <script>
+        let data=[];
+        function handleClick() {
+            
+            let newData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,//targeting input fields
+                number: document.getElementById("num").value
+            };
+            data.push(newData);
+            console.log(data);
+            document.getElementById("name").value = ""; 
+            document.getElementById("email").value = ""; 
+            document.getElementById("num").value = ""; 
+
+        }
+        // let data=[];
+        // document.getElementById("btn").addEventListener("click", ()=> {
+        //     let ram = document.getElementById("shyam").value;
+        //     console.log(ram);
+        //     data.push(ram);
+        //     console.log(data);
+        //     document.getElementById("shyam").value = "";
+        // });
+    </script>
+</body>
+</html>

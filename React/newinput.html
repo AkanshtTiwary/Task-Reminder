@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body>
+    <div class="flex justify-evenly px-4 bg-blue-200 py-4">
+      <input
+        type="number"
+        placeholder="Enter your regno: "
+        class="border p-3"
+        id="regno"
+      />
+      <input
+        type="text"
+        placeholder="Enter your name: "
+        class="border p-3"
+        id="name"
+      />
+      <input
+        type="text"
+        placeholder="Enter your CGPA: "
+        class="border p-3"
+        id="CGPA"
+      />
+      <button
+        class="border px-4 py-2 rounded-2xl bg-blue-500 text-white"
+        onclick="{handleClick()}"
+      >
+        Click here to add data
+      </button>
+    </div>
+    <div class="border p-4 m-4 bg-blue-200">
+        <table id="table"class="mx-auto">
+            <tr class="bg-red-200">
+                <th class="border p-3 w-80 text-center">Registration Number</th>
+                <th class="border p-3 w-80 text-center">Name</th>
+                <th class="border p-3 w-80 text-center">CGPA</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+      let data = [];
+      function handleClick() {
+        let obj = {
+          regno: document.getElementById("regno").value,
+          name: document.getElementById("name").value,
+          CGPA: document.getElementById("CGPA").value,
+        };
+        data.push(obj);
+        console.log(data);
+        document.getElementById("regno").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("CGPA").value = "";
+        show();
+      }
+      function show() {
+        let newData=data.map((i)=>{ //when we use map function we have to return something
+            return `<tr class="bg-red-200">
+                <th class="border p-3 w-80 text-center">${i.regno}</th>
+                <th class="border p-3 w-80 text-center">${i.name}</th>
+                <th class="border p-3 w-80 text-center">${i.CGPA}</th>
+            </tr>`//we use `` for html + js
+        })
+        document.getElementById("table").innerHTML += newData;
+      }
+    </script>
+  </body>
+</html>
