@@ -1,44 +1,3 @@
-// import React, { useState } from 'react';
-// import {
-//     Box,
-//     Paper,
-//     Typography,
-//     TextField,
-//     Button,
-//     Grid,
-//     FormControl,
-//     InputLabel,
-//     Select,
-//     MenuItem,
-//     Alert,
-//     FormControlLabel,
-//     Switch,
-//     IconButton
-// } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-// import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-// import { ArrowBack as ArrowBackIcon } from '@mui/icons-material';
-// import { taskService } from '../services/taskService';
-// import { motion } from 'framer-motion';
-// import toast from 'react-hot-toast';
-
-// const CreateTask = () => {
-//     const navigate = useNavigate();
-//     const [loading, setLoading] = useState(false);
-//     const [error, setError] = useState('');
-    
-//     const [formData, setFormData] = useState({
-//         title: '',
-//         description: '',
-//         category: 'personal',
-//         priority: 'medium',
-//         dueDate: new Date(),
-//         reminderTime: new Date(new Date().getTime() + 60 * 60 * 1000), // 1 hour from now
-//         repeat: 'none',
-/// ...existing code...
 import React, { useState } from 'react';
 import {
     Box,
@@ -183,8 +142,24 @@ const CreateTask = () => {
         }));
     };
 
+    const validateStep = (step) => {
+        switch (step) {
+            case 0:
+                if (!formData.title.trim()) {
+                    setError('Please enter a task title');
+                    return false;
+                }
+                return true;
+            default:
+                return true;
+        }
+    };
+
     const handleNext = () => {
-        setActiveStep((prevStep) => prevStep + 1);
+        if (validateStep(activeStep)) {
+            setError('');
+            setActiveStep((prevStep) => prevStep + 1);
+        }
     };
 
     const handleBack = () => {
